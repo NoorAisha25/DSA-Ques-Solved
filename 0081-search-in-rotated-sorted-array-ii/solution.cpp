@@ -2,36 +2,35 @@ class Solution {
 public:
     bool search(vector<int>& nums, int target) {
         int n = nums.size();
-        int low = 0 ; int high = n-1;
-        while(low <= high ){
-            int mid = (low + high )/2;
-            
-            if(nums[mid] == target) return true;
+        int l = 0 , h = n - 1;
+        while( l <= h){
+            int m = (l + h)/2;
+            //1
+            if(nums[m] == target) return true;
 
-            // for duplicates if present
-            if(nums[low] == nums[mid] && nums[mid] == nums[high]){
-                low = low +1 ;
-                high = high - 1;
+            // 2
+            if(nums[l] == nums[m] && nums[m] == nums[h]){
+                l = l + 1;
+                h = h - 1;
                 continue;
             }
-            
-            // left sorted
-            if(nums[low] <= nums[mid]){
-                  if(nums[low] <= target && target <= nums[mid]){
-                    high = mid -1;
-                  }
-                  else{
-                    low = mid+1;
-                  }
+
+            //3
+            if(nums[l] <= nums[m]){
+                if(nums[l]<= target && target <= nums[m]){
+                    h = m -1; 
+                }
+                else l = m +1 ;
             }
+
+            //4
             else{
-                if(nums[mid] <= target && target <= nums[high]){
-                    low = mid +1;
-                  }
-                  else{
-                    high = mid -1;
-                  }
+                if(nums[m]<= target && target <= nums[h]){
+                    l = m + 1; 
+                }
+                else h = m -1  ;
             }
-        }  return false;
+        }
+        return false;
     }  
 };
