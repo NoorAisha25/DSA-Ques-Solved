@@ -24,7 +24,7 @@ public:
     //    return -1;
         /*--moore's voting algorithm --*/
         int count=0;
-        int majEle = nums[0];
+        int majEle = NULL;
         for(int i=0 ; i<n ; i++){
             if(count==0){
                 majEle= nums[i];
