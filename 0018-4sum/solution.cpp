@@ -2,45 +2,52 @@ class Solution {
 public:
     
     vector<vector<int>> fourSum(vector<int>& nums, int target) {
-    vector<vector<int>> result;
-       int n = nums.size() ;
+         int n = nums.size();
 
-       if(n < 4 ) return {};
+         vector<vector<int>> result;
 
-       sort(nums.begin() , nums.end());
-       
-       for(int i=0 ; i<n-3 ; i++){
+         if(n < 4) return {};
 
-        if(i>0 && nums[i]==nums[i-1]) continue;
+         sort(nums.begin() , nums.end());
 
-          for(int j=i+1 ; j<n-2 ; j++){
-              
-              if(j> i+1 && nums[j] == nums[j-1]) continue;
+         for(int i = 0 ; i< n-3 ; i++){
 
-              long long newTarget = (long long )target - nums[i] - nums[j];
-              
-              int left = j+1;
-              int right = n-1;
-              while(left < right){
+            if(i>0 && nums[i]==nums[i-1]) continue;
 
-                long long sum = nums[left] + nums[right] ;
+            int n1 = nums[i];
 
-                if( sum > newTarget) right--;
-                else if( sum < newTarget) left++;
+               for(int j = i+1 ; j< n-2 ; j++){
+                 
+                 if(j>i+1 && nums[j] == nums[j-1]) continue;
+                   
+                   int n2 = nums[j];
+            
+                 long long newtarget = (long long)target - n1 - n2;
 
-                else{
-                    while(left < right && nums[left] == nums[left + 1]) left++;
-                    while(left < right && nums[right] == nums[right - 1]) right--;
+                    int sum = 0;
+         int l = j + 1;
+         int m = n-1;
 
-                    result.push_back( {nums[i] , nums[j], nums[left] , nums[right] });
+         while(l < m){
+            sum = nums[l] + nums[m];
 
-                    left++;
-                    right--;
-                }
-              }
-          }
-       }
+            if(sum > newtarget) m--;
+            else if ( sum < newtarget) l++;
 
-       return result;
+            else{
+                while( l<m && nums[l] == nums[l+1]) l++;
+                while(l<m && nums[m] == nums[m-1]) m--;
+
+                result.push_back ({nums[i] , nums[j] , nums[l] , nums[m]});
+
+                l++;
+                m--;
+            }
+         }
+      }
+    }
+        
+         return result;
+
     }
 };
