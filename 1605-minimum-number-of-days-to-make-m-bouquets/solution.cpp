@@ -24,7 +24,7 @@ public:
     int minDays(vector<int>& bloomDay, int m, int k) {
         int l = 1 ;
         int h = *max_element(bloomDay.begin() , bloomDay.end());
-        int result = -1;
+        int mindays = -1;
         while(l<= h){
 
             int mid = l + (h-l)/2;
@@ -32,13 +32,13 @@ public:
             int MakeBouquets = func(bloomDay , mid , k);
 
             if(MakeBouquets >= m) {
-                result = mid;
+                mindays = mid;
                 h = mid - 1;
             }
             else{
                 l = mid + 1;
             }
         }
-        return result;
+        return mindays;
     }
 };
