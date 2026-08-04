@@ -1,44 +1,39 @@
 class Solution {
 public:
+    int func(vector<int>&arr , int mid , int k){
+        int boq = 0;
+        int cons = 0;
 
-    int func(vector<int>& bloomDay, int mid , int k){
-        int bouqecnt = 0;
-        int consecutive_cnt = 0;
-        
-        for(int i=0 ; i< bloomDay.size() ; i++){
+        for(int i = 0 ; i<arr.size() ; i++){
 
-            if(bloomDay[i] <= mid) {
-                consecutive_cnt++;
+            if(arr[i] <= mid){
+                cons++;
             }
-            else{
-                consecutive_cnt = 0;
-            }
-            if(consecutive_cnt == k){
-                bouqecnt++;
-                consecutive_cnt = 0;
+            else{ cons = 0;}
+            if(cons == k){
+                boq++;
+                cons = 0;
             }
         }
-        
-        return bouqecnt;
+        return boq;
     }
-    int minDays(vector<int>& bloomDay, int m, int k) {
-        int l = 1 ;
-        int h = *max_element(bloomDay.begin() , bloomDay.end());
-        int mindays = -1;
-        while(l<= h){
+    
+    int minDays(vector<int>& arr, int m, int k) {
+        int l = 1;
+        int h = *max_element(arr.begin() , arr.end());
+        int minNum = -1;
 
-            int mid = l + (h-l)/2;
+        while( l <= h){
+            int mid = l + ( h - l)/2;
 
-            int MakeBouquets = func(bloomDay , mid , k);
+            int posAns = func(arr , mid , k);
 
-            if(MakeBouquets >= m) {
-                mindays = mid;
+            if(posAns >= m){
+                minNum = mid;
                 h = mid - 1;
             }
-            else{
-                l = mid + 1;
-            }
+            else l = mid + 1;
         }
-        return mindays;
+        return minNum;
     }
 };
