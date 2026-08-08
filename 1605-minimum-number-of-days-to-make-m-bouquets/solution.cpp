@@ -1,39 +1,36 @@
 class Solution {
 public:
-    int func(vector<int>&arr , int mid , int k){
+    int fun(vector<int>& arr, int m, int k){
         int boq = 0;
-        int cons = 0;
+        int curr = 0;
 
         for(int i = 0 ; i<arr.size() ; i++){
 
-            if(arr[i] <= mid){
-                cons++;
+            if(arr[i] <= m){
+                curr++;
             }
-            else{ cons = 0;}
-            if(cons == k){
+            else { curr = 0;}
+            if(curr == k){
                 boq++;
-                cons = 0;
+                curr=0;
             }
         }
         return boq;
     }
-    
     int minDays(vector<int>& arr, int m, int k) {
         int l = 1;
         int h = *max_element(arr.begin() , arr.end());
-        int minNum = -1;
-
+        int mini = -1;
         while( l <= h){
-            int mid = l + ( h - l)/2;
+            int mid = l + ( h - l )/2;
+            int possAns = fun(arr , mid , k);
 
-            int posAns = func(arr , mid , k);
-
-            if(posAns >= m){
-                minNum = mid;
+            if( possAns >= m){
+                mini = mid;
                 h = mid - 1;
             }
             else l = mid + 1;
         }
-        return minNum;
+        return mini;
     }
 };
