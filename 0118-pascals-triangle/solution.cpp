@@ -1,15 +1,15 @@
 class Solution {
 public:
     vector<vector<int>> generate(int rowIndex){
-       vector<vector<int>> res(rowIndex);
+      vector<vector<int>>res(rowIndex);
 
-       for(int i = 0 ; i < rowIndex ; i++){
-          res[i] = vector<int>(i + 1 , 1);
-          for( int j = 1 ; j < i ; j++){
+      for(int i = 0 ; i < rowIndex ; i++){
+        res[i] = vector<int>(i + 1 , 1);
+        for(int j = 1 ; j < i ; j++){
             res[i][j] = res[i-1][j] + res[i-1][j-1];
-          }
-       }
-       return res;
+        }
+      }
+      return res;
     }
 }; 
 /* if rowIndex = 5
