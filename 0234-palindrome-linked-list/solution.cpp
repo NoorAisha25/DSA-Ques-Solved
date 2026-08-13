@@ -10,57 +10,55 @@
  */
 class Solution {
 public:
-    ListNode* reverse(ListNode* head){
-        ListNode* prev = NULL;
-        ListNode* current = head;
-
-        while(current != NULL){
-               ListNode* nN = current->next;
-               current->next = prev;
-               prev = current;
-               current = nN;
-        }
-        return prev;
-    }
+   
     bool isPalindrome(ListNode* head) {
-/*---------------Naive approach by tc - O(n)-------*/
-        // vector<int> temp;
-        // ListNode* current = head;
+    //   vector<int>temp;
 
-        // while (current != NULL) {
-        //     temp.push_back(current->val);
-        //     current = current->next;
-        // }
-        // int i = 0;
-        // int j = temp.size() - 1;
-        // while (i <= j) {
-        //     if (temp[i] != temp[j])
-        //         return false;
-        //     i++;
-        //     j--;
-        // }
-        // return true;
-/*----------------2nd approach ------------------*/
-       if(head == NULL || head->next == NULL) return head;
+    //   ListNode* curr = head;
 
-       ListNode* slow = head;    
-       ListNode* fast = head;
-       ListNode* prev = NULL;
+    //   while(curr != NULL){
+    //       temp.push_back(curr -> val);
+    //       curr = curr -> next;
+    //   }
 
-       while(fast != NULL && fast->next != NULL)   {
-             prev = slow;
-             slow = slow->next;
-             fast = fast->next->next;
-       } 
+    //   int i = 0 ;
+    //   int j = temp.size() - 1;
 
-       ListNode * tail = reverse(slow);
+    //   while( i <= j){
+    //      if(temp[i] != temp[j]){
+    //         return false;
+    //      }
+    //      i++;
+    //      j--;
+    //   }
+    //   return true;
 
-       while(tail != NULL && head != NULL ){
+        ListNode* prev = NULL;
+        ListNode* slow = head;
+        ListNode* fast = head;
 
-        if(tail->val != head->val) return false;
-        tail = tail->next;
-        head = head->next;
+        while( fast != NULL && fast->next != NULL){
+            prev = slow ;
+            slow = slow -> next;
+            fast = fast->next->next;
         }
-          return true;
+
+        ListNode* back = NULL;
+        while( slow != NULL){
+            ListNode* nN = slow -> next;
+            slow -> next = back;
+            back = slow;
+            slow = nN;
+        }
+
+        prev = head;
+
+        while( prev != NULL && back != NULL){
+            if( prev -> val != back -> val) return false;
+            prev = prev->next ;
+            back = back ->next;
+        }
+
+        return true;
     }
 };
