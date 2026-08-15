@@ -1,24 +1,30 @@
 class Solution {
 public:
-    void solve(int i , int n , vector<vector<int>>& ans , vector<int>& comb , int k){
+    void solve(int i ,  int n , vector<int>&comb, vector<vector<int>> &ans , int k  ){
 
-        if(n < 0 ) return;
-        if(n == 0 && k == 0){
+        if( n < 0 ){
+            return;
+        }
+        if(k == 0 && n == 0){
             ans.push_back(comb);
             return;
         }
+        
+        for(int j = i ; j < 10 ; j++){
 
-        for(int j = i ; j<10 ; j++){
-            if(n < 0 || k < 0) break;
+            if( n < 0 || k < 0) break;
+            //include
             comb.push_back(j);
-            solve(j+1 , n-j , ans , comb , k-1);
+            solve(j+1 ,n-j , comb , ans , k - 1);
+            //exclude
             comb.pop_back();
-        }
+      }
     }
     vector<vector<int>> combinationSum3(int k, int n) {
-        vector<vector<int>> ans;
-        vector<int> comb;
-        solve(1 , n , ans , comb , k);
+    
+        vector<vector<int>>ans;
+        vector<int>comb;
+        solve(1 , n , comb , ans , k);
         return ans;
     }
 };
