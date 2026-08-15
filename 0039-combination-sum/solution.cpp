@@ -1,35 +1,36 @@
 class Solution {
 public:
-    set<vector<int>>st; 
+    set<vector<int>>s;
 
-    void solve(int i , vector<int>&arr, vector<int>&comb , vector<vector<int>> &ans , int k){
-       
-       if(i == arr.size() || k < 0){
-        return ;
-       }
-       if(k == 0){
-          if(st.find(comb) == st.end()){
-            ans.push_back(comb);
-            st.insert(comb);
-          }
-          return;
-       }
+    void solve(int i ,  vector<vector<int>> &ans , vector<int>&arr , int k , vector<int>&comb ){
 
-        //single
+        if( i == arr.size() || k < 0 ){
+            return;
+        }
+        if(k == 0){
+            if(s.find(comb) == s.end()){
+                ans.push_back(comb);
+                s.insert(comb);
+            }
+            return;
+        }
+        //single ele
         comb.push_back(arr[i]);
-        solve(i+1 , arr, comb , ans ,k - arr[i]);
+        solve(i+1 , ans , arr, k-arr[i] , comb);
+
         //multiple
-        solve(i , arr, comb , ans ,k - arr[i]);
+        solve(i , ans , arr ,k-arr[i] , comb);
+
         //exclude
         comb.pop_back();
-        solve(i+1 , arr, comb , ans ,k);
+        solve(i+1 , ans , arr, k , comb);
     }
     vector<vector<int>> combinationSum(vector<int>& arr, int target) {
         sort(arr.begin() , arr.end());
-        vector<vector<int>> ans;
-        vector<int> comb;
+        vector<vector<int>>ans;
+        vector<int>comb;
 
-        solve( 0 , arr, comb , ans , target);
+        solve(0 , ans , arr , target , comb);
         return ans;
     }
 };
