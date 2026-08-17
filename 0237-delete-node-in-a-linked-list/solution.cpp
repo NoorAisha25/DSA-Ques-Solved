@@ -27,15 +27,9 @@ public:
         //     prev = temp;
         //     temp = temp -> next;
 
-        // Copy data from the next node
         node->val = node->next->val;
-        // Save pointer to the next node
         ListNode* temp = node->next;
-        // Skip the next node
         node->next = node->next->next;
-        // Delete the skipped node
-        delete temp; 
-
-        
+        delete temp;   
     }
 };
