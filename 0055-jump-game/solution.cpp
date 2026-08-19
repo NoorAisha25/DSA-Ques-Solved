@@ -5,9 +5,9 @@ public:
         int maxjump = 0;
 
         for(int i = 0 ; i < n ; i++){
-            
-            if( i > maxjump) return false;
-            maxjump = max(maxjump , i +nums[i]);
+
+            if(i > maxjump) return false;
+            maxjump = max( maxjump , nums[i]+i);
         }
         return true;
     }
