@@ -1,33 +1,32 @@
 class Solution {
 public:
     vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
-        int i = 0;
-        vector<vector<int>> res;
-        int n = intervals.size();
-        while( i < n){
+        int i = 0 ;
+        vector<vector<int>>ans;
 
-            // eg [1,2][4,8]
+        while( i < intervals.size()){
+
             if(intervals[i][1] < newInterval[0]){
-                res.push_back(intervals[i]);
+                ans.push_back(intervals[i]);
             }
-            else if( intervals[i][0] > newInterval[1]){
-                //[12,16][4,8]
+
+            else if(intervals[i][0] > newInterval[1]){
                 break;
             }
+
             else{
-                //merge overlapping intervals
+                newInterval[1] = max(intervals[i][1] , newInterval[1]);
                 newInterval[0] = min(newInterval[0] , intervals[i][0]);
-                newInterval[1] = max(newInterval[1] , intervals[i][1]);
             }
             i++;
         }
 
-        res.push_back(newInterval);
-        //break k baad jo bache the
-        while(i<n){
-            res.push_back(intervals[i]);
+        ans.push_back(newInterval);
+
+        while(i < intervals.size()){
+            ans.push_back(intervals[i]);
             i++;
         }
-        return res;
+        return ans;
     }
 };
