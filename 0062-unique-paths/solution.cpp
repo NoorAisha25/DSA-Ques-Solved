@@ -2,7 +2,7 @@ class Solution {
 public:
     int uniquePaths(int m, int n) {
         
-        vector<vector<int>> t( m , vector<int>(n , 0));
+        vector<vector<int>> t(m , vector<int>(n , -1));
 
         t[0][0] = 1;
 
