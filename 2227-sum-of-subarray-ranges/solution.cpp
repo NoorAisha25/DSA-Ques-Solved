@@ -1,111 +1,109 @@
 class Solution {
 public:
-    vector<int> nge(vector<int>&nums){
-        int n = nums.size();
-        stack<int> st;
-        vector<int> arr( n , n);
-        for(int i = n - 1 ; i>= 0 ; i--){
+    vector<int> PSE(vector<int>&arr){
+        int n = arr.size();
+        vector<int>ans(n , -1);
+        stack<int>st;
 
-            while(!st.empty() && nums[st.top()] <= nums[i]){
+        for(int i = 0 ; i < n ; i++){
+            while(!st.empty() && arr[st.top()] > arr[i]){
                 st.pop();
             }
             if(!st.empty()){
-                arr[i] = st.top();
+                ans[i] = st.top();
             }
             st.push(i);
         }
-        return arr;
+        return ans;
     }
-    vector<int> pge(vector<int>&nums){
-        int n = nums.size();
-        stack<int> st;
-        vector<int> arr( n , -1);
-        for(int i = 0 ; i< n ; i++){
+    vector<int> PGE(vector<int>&arr){
+        int n = arr.size();
+        vector<int>ans(n , -1);
+        stack<int>st;
 
-            while(!st.empty() && nums[st.top()] < nums[i]){
+        for(int i = 0 ; i < n ; i++){
+            while(!st.empty() && arr[st.top()] < arr[i]){
                 st.pop();
             }
             if(!st.empty()){
-                arr[i] = st.top();
+                ans[i] = st.top();
             }
             st.push(i);
         }
-        return arr;
+        return ans;
     }
-    vector<int> nse(vector<int>&nums){
-        int n = nums.size();
-        stack<int> st;
-        vector<int> arr( n , n);
-        for(int i = n - 1 ; i>= 0 ; i--){
+    vector<int> NSE(vector<int>&arr){
+        int n = arr.size();
+        vector<int>ans(n , n);
+        stack<int>st;
 
-            while(!st.empty() && nums[st.top()] >= nums[i]){
+        for(int i = n-1 ; i>=0 ; i--){
+            while(!st.empty() && arr[st.top()] >= arr[i]){
                 st.pop();
             }
             if(!st.empty()){
-                arr[i] = st.top();
+                ans[i] = st.top();
             }
             st.push(i);
         }
-        return arr;
+        return ans;
     }
-    vector<int> pse(vector<int>&nums){
-        int n = nums.size();
-        stack<int> st;
-        vector<int> arr( n , -1);
-        for(int i = 0 ; i< n ; i++){
+    vector<int> NGE(vector<int>&arr){
+        int n = arr.size();
+        vector<int>ans(n , n);
+        stack<int>st;
 
-            while(!st.empty() && nums[st.top()] > nums[i]){
+        for(int i = n-1 ; i>=0 ; i--){
+            while(!st.empty() && arr[st.top()] <= arr[i]){
                 st.pop();
             }
             if(!st.empty()){
-                arr[i] = st.top();
+                ans[i] = st.top();
             }
             st.push(i);
         }
-        return arr;
+        return ans;
     }
-    long long  sumMin(vector<int>&nums){
-        vector<int>NSE = nse(nums);
-        vector<int>PSE = pse(nums);
+    long long SumMin(vector<int>& arr){   
+        vector<int> nse = NSE(arr);
+        vector<int> pse = PSE(arr);
+
         long long sum = 0;
-
-        for(int i = 0 ; i<nums.size() ; i++){
-
-            long long left = i - PSE[i];
-            long long right = NSE[i] - i;
+        int i = 0;
+        while( i < arr.size()){
+            long long left = i - pse[i];
+            long long right = nse[i] - i;
 
             long long totalways = left * right ;
-            
-            long long totalsum = nums[i] * totalways;
 
-            sum = sum + totalsum ;
+            long long totalSum = arr[i] * totalways;
 
-        }
+            sum = sum + totalSum;
+            i++;
+        } 
         return sum;
     }
-    long long  sumMax(vector<int>&nums){
-        vector<int>NGE = nge(nums);
-        vector<int>PGE = pge(nums);
+    long long SumMax(vector<int>& arr){  
+        vector<int> nge = NGE(arr);
+        vector<int> pge = PGE(arr);
+
         long long sum = 0;
-
-        for(int i = 0 ; i<nums.size() ; i++){
-
-            long long left = i - PGE[i];
-            long long right = NGE[i] - i;
+        int i = 0;
+        while( i < arr.size()){
+            long long left = i - pge[i];
+            long long right = nge[i] - i;
 
             long long totalways = left * right ;
-            
-            long long totalsum = nums[i] * totalways;
 
-            sum = sum + totalsum ;
+            long long totalSum = arr[i] * totalways;
 
-        }
+            sum = sum + totalSum;
+            i++;
+        } 
         return sum;
     }
-
     long long subArrayRanges(vector<int>& nums) {
-       
-       long long res = (sumMax(nums) - sumMin(nums));
+       long long res = (SumMax(nums) - SumMin(nums));
        return res;
     }
 };
