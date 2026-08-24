@@ -5,9 +5,8 @@ public:
         int cnt = 0;
 
         for(int i = 0 ; i < 32 ; i++){
-            if(ans & ( 1 << i)) cnt++;
+            if(ans & (1 << i)) cnt++;
         }
-
         return cnt;
     }
 };
