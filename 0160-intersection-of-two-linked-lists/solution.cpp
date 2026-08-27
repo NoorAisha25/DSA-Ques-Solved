@@ -8,36 +8,37 @@
  */
 class Solution {
 public:
-     
-    ListNode* collisionpoint( ListNode* longer, ListNode* shorter, int d){
-
+    ListNode* collision(ListNode* Longer , ListNode* Shorter , int d){
         while(d--){
-            longer = longer->next;
+            Longer = Longer->next;
         }
 
-        while(longer != shorter){
-            longer = longer->next;
-            shorter = shorter->next;
+        while(Longer != Shorter){
+            Longer = Longer->next;
+            Shorter = Shorter -> next;
         }
-        return longer;
+
+        return Longer;
     }
-    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-       
-       if(headA == NULL || headB == NULL) return NULL;
-       ListNode* tempA = headA;
-       ListNode* tempB = headB;
-       int cnta = 0 ; int cntb = 0;
+    ListNode *getIntersectionNode(ListNode *A, ListNode *B) {
+       if(A == NULL && B == NULL) return NULL;
 
-       while(tempA != NULL){
-        cnta++;
-        tempA = tempA->next;
-       }
-       while(tempB != NULL){
-        cntb++;
-        tempB = tempB->next;
+       ListNode* ta = A;
+       ListNode* tb = B;
+       int a = 0;
+       int b = 0;
+
+       while(ta != NULL){
+            a++;
+            ta = ta -> next;
        }
 
-       if(cnta > cntb) return collisionpoint( headA, headB , cnta - cntb);
-       else return collisionpoint(headB , headA, cntb - cnta);
+       while(tb != NULL){
+            b++;
+            tb = tb -> next;
+       }
+
+       if(a > b) return collision(A , B , a-b);
+       else return collision(B , A , b-a);
     }
 };
