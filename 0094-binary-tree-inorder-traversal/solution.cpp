@@ -12,26 +12,15 @@
 class Solution {
 public:
     vector<int> inorderTraversal(TreeNode* root) {
-        vector<int> result;
-        stack<TreeNode*> st;
-        TreeNode* current = root;
-
-        while (current != nullptr || !st.empty()) {
-            // Reach the leftmost node of the current node
-            while (current != nullptr) {
-                st.push(current);
-                current = current->left;
-            }
-
-            // Current must be nullptr at this point
-            current = st.top();
-            st.pop();
-            result.push_back(current->val);
-
-            // Visit the right subtree
-            current = current->right;
-        }
-
-        return result;
+        vector<int>arr;
+        inorder(root , arr);
+        return arr;
+    }
+private:
+    void inorder(TreeNode* root , vector<int>&arr){
+        if(root == NULL) return ;
+        inorder(root->left, arr);
+        arr.push_back(root->val);
+        inorder(root->right , arr);
     }
 };
