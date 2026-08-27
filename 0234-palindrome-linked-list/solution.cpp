@@ -12,53 +12,33 @@ class Solution {
 public:
    
     bool isPalindrome(ListNode* head) {
-    //   vector<int>temp;
+       if( head == NULL || head -> next == NULL) return true;
+       ListNode* prev = NULL;
+       ListNode* slow = head;
+       ListNode* fast = head;
 
-    //   ListNode* curr = head;
+       while( fast != NULL && fast -> next != NULL){
+          prev = slow;
+          slow = slow -> next;
+          fast = fast ->next -> next;
+       }
 
-    //   while(curr != NULL){
-    //       temp.push_back(curr -> val);
-    //       curr = curr -> next;
-    //   }
+       prev ->next = nullptr;
+       prev = head;
 
-    //   int i = 0 ;
-    //   int j = temp.size() - 1;
-
-    //   while( i <= j){
-    //      if(temp[i] != temp[j]){
-    //         return false;
-    //      }
-    //      i++;
-    //      j--;
-    //   }
-    //   return true;
-
-        ListNode* prev = NULL;
-        ListNode* slow = head;
-        ListNode* fast = head;
-
-        while( fast != NULL && fast->next != NULL){
-            prev = slow ;
-            slow = slow -> next;
-            fast = fast->next->next;
-        }
-
-        ListNode* back = NULL;
-        while( slow != NULL){
-            ListNode* nN = slow -> next;
-            slow -> next = back;
+       ListNode* back = NULL;
+       while(slow != NULL){
+            ListNode* n = slow -> next;
+            slow ->next = back;
             back = slow;
-            slow = nN;
-        }
+            slow = n;
+       }
 
-        prev = head;
-
-        while( prev != NULL && back != NULL){
-            if( prev -> val != back -> val) return false;
-            prev = prev->next ;
-            back = back ->next;
-        }
-
-        return true;
+       while( prev != NULL && back != NULL){
+           if( prev->val != back ->val) return false;
+           prev = prev->next;
+           back = back -> next;
+       }
+       return true;
     }
 };
