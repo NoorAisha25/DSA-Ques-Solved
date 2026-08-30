@@ -1,36 +1,34 @@
 class Solution {
 public:
-    bool check(string&prev , string& curr){
-        if(prev.size()+1 != curr.size()) return false;
-        
-        int i = 0;
+    bool check(string& prev , string& curr){
+        if(prev.size() + 1 != curr.size()) return false;
+
+        int i = 0 ;
         int j = 0 ;
 
         while(i < prev.size() && j < curr.size()){
-
             if(prev[i] == curr[j]){
                 i++;
             }
-                j++;
+            j++;
         }
-
         return i == prev.size();
     }
     int longestStrChain(vector<string>& words) {
         int n = words.size();
 
-        sort(words.begin() , words.end() , [](string&a , string&b){
-            return a.size() < b.size();
+        sort(words.begin() , words.end() , [](string&A , string&B){
+            return A.size() < B.size();
         });
 
         vector<int>dp(n , 1);
         int len = 1;
 
-        for(int i = 1 ; i < n ; i++){
-            for(int j = 0 ; j < n ; j++){
+        for(int i = 1 ; i < n ; i++ ){
+            for(int j = 0 ; j < i ; j++){
                 if(check(words[j] , words[i])){
-                dp[i] = max( dp[i] , dp[j]+1);
-              }
+                    dp[i] = max(dp[i] , dp[j] + 1);
+                }
             }
             len = max( len , dp[i]);
         }
