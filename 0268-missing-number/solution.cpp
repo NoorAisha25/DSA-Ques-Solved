@@ -24,13 +24,14 @@ public:
         // return s-sum;
         // return -1;
 
-        int xr = 0;
-        for(int i = 0 ; i<=n ; i++){
-            xr ^= i;
+        int x1 = 0;
+        for(int i = 0 ; i <= n ; i++){
+            x1 ^= i;
         }
-        for(int i = 0 ; i<n ; i++){
-            xr ^= nums[i];
+        int x2=0;
+        for(int i = 0 ; i < n ; i++ ){
+            x2 ^= nums[i];
         }
-        return xr;
+        return x1^x2;
     }
 };
