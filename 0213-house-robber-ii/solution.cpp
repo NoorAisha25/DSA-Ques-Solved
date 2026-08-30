@@ -1,35 +1,29 @@
 class Solution {
 public:
     int rob(vector<int>& nums) {
-       int n = nums.size();
-       
-       if(n == 0) return 0;
-       if(n == 1) return nums[0];
-       if(n == 2) return max(nums[0] , nums[1]);
+        int n = nums.size();
+        if(n == 0) return 0;
+        if(n == 1) return nums[0];
+        if(n == 2) return max(nums[0] , nums[1]);
 
-       vector<int>dp1(n);
+        vector<int>a(n);
+        a[1] = nums[1];
+        a[2] = max(nums[1] , nums[2]);
 
-       dp1[1] = nums[1];
-       dp1[2] = max(nums[1] , nums[2]);
+        for(int i = 3 ; i < n ; i++){
+            a[i] = max( a[i-1] , a[i-2] + nums[i]);
+        }
+        int case1 = a[n-1];
 
-       for(int i = 3 ; i < n ; i++){
-          dp1[i] = max( dp1[i-1] , dp1[i-2] + nums[i]);
-       }
+        vector<int>b(n);
+        b[0] = nums[0];
+        b[1] = max(nums[1] , nums[0]);
 
-       int case1 = dp1[n-1];
+        for(int i = 2 ; i < n - 1 ; i++){
+            b[i] = max( b[i-1] , b[i-2] + nums[i]);
+        }
+        int case2 = b[n-2];
 
-       vector<int>dp2(n);
-
-       dp2[0] = nums[0];
-       dp2[1] = max(nums[0] , nums[1]);
-
-       for(int i = 2 ; i < n-1 ; i++){
-         dp2[i] = max( dp2[i-1] , dp2[i-2] + nums[i]);
-       }
-
-       int case2 = dp2[n-2];
-
-       return max(case1, case2);
-
+        return max(case1 , case2);
     }
 };
