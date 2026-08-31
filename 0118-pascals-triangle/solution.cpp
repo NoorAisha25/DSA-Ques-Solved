@@ -4,10 +4,10 @@ public:
       vector<vector<int>>res(rowIndex);
 
       for(int i = 0 ; i < rowIndex ; i++){
-        res[i] = vector<int>(i + 1 , 1);
-        for(int j = 1 ; j < i ; j++){
+         res[i] = vector<int>(i + 1 , 1);
+         for(int j = 1 ;  j < i  ; j++){
             res[i][j] = res[i-1][j] + res[i-1][j-1];
-        }
+         }
       }
       return res;
     }
