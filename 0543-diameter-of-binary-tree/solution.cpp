@@ -18,12 +18,13 @@ public:
     }
 
     int height(TreeNode* root , int &d){
-        if(root == NULL ) return 0;
+        if(root == NULL) return 0;
 
-        int left = height(root -> left , d);
-        int right = height(root -> right , d);
+        int left = height(root->left , d);
+        int right = height(root->right , d);
 
         d = max( d , left + right);
+
         return 1 + max(left , right);
     }
 };
