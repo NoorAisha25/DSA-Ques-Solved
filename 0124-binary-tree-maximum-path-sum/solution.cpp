@@ -11,30 +11,24 @@
  */
 class Solution {
 public:    
-    int maxSum;
+    int maxSum ;
     int solve(TreeNode* root){
         if(root == NULL) return 0;
 
         int l = solve(root -> left);
         int r = solve(root -> right);
 
-        //1
-        int neeche_wala_accha = l + r + root->val;
+        int case1 = l + r + root->val;
+        int case2 = max(l , r) + root->val;
+        int case3 = root->val;
 
-        //2
-        int koi_ek_accha = max(l , r) + root->val;
+        maxSum = max({maxSum , case1 , case2 , case3});
 
-        //3
-        int sirf_root_accha = root->val;
-
-        maxSum = max({maxSum , neeche_wala_accha ,koi_ek_accha, sirf_root_accha }) ;
-
-        return max(koi_ek_accha, sirf_root_accha);
+        return max(case2 , case3);
     }
     int maxPathSum(TreeNode* root) {
-
-        maxSum = INT_MIN;
-        solve(root);
-        return maxSum;
+       maxSum = INT_MIN;
+       solve(root);
+       return maxSum;
     }
 };
