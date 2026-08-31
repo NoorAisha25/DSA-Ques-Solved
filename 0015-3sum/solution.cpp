@@ -1,48 +1,40 @@
 class Solution {
 public:
-    vector<vector<int>> result;
+    vector<vector<int>>res;
+    void twoSum(vector<int>&nums , int target , int i , int j){
+        int sum = 0;
 
-    void twoSum( vector<int>& nums , int target , int i , int j){
-             
-             int sum = 0;
-             while(i < j){
+        while(i < j){
+        sum = nums[i] + nums[j];
 
-             sum = nums[i] + nums[j];
+        if(sum < target) i++;
+        else if(sum > target) j--;
+        else{
+            while(i < j && nums[i] == nums[i+1]) i++;
+            while(i < j && nums[j] == nums[j-1]) j--;
 
-             if(sum > target) j--;
-             
-             else if(sum < target) i++;
+            res.push_back({-target , nums[i] , nums[j]});
 
-             else{
-                while(i<j && nums[i] == nums[i+1] ) i++;
-                while(i<j && nums[j] == nums[j-1] ) j--;
-
-                result.push_back({-target , nums[i] , nums[j]});
-                i++;
-                j--;
-             }
-          }
+            i++;
+            j--;
+         } 
+       }
     }
     vector<vector<int>> threeSum(vector<int>& nums) {
        int n = nums.size();
 
-       if(n < 3){
-        return {};
-       }
-       
-       result.clear();
-       
+       if(n < 3) return {};
+
+       res.clear();
        sort(nums.begin() , nums.end());
 
-       for(int i = 0 ; i<n-2 ; i++){
-            
-            if(i>0 && nums[i] == nums[i-1]) continue;
+       for(int i = 0 ; i < n-2 ; i++){
+         if( i > 0  && nums[i] == nums[i-1]) continue;
 
-            int n1 = nums[i];
-            int target = -(n1);
-            twoSum( nums , target , i+1 , n-1);
+         int n1 = nums[i];
+         int target = -n1;
+         twoSum(nums , target , i+1 , n-1);
        }
-       return result;
+       return res;
     }
-
 };
