@@ -10,26 +10,28 @@
  * };
  */
 class Solution {
-private:
-    int solve(TreeNode* root ){
+
+public:    
+    int countNodes(TreeNode* root) {
+       if(root == NULL ) return 0;
+
+       int left = solve(root->left);
+       int right = solve(root->right);
+
+       if(left == right){
+        return (1 << left) + countNodes(root->right);
+       }
+       else{
+        return (1 << right) + countNodes(root -> left);
+       }
+    }
+
+    int solve(TreeNode* root){
         int h = 0;
         while(root){
             h++;
-            root = root ->left;
+            root = root -> left;
         }
         return h;
-    }
-public:    
-    int countNodes(TreeNode* root) {
-        if(root == NULL) return 0;
-
-        int left = solve(root->left );
-        int right = solve(root -> right );
-        if(left == right){
-            return (1 << left) + countNodes(root -> right);
-        }
-        else{
-            return (1 << right) + countNodes(root -> left);
-        }
     }
 };
