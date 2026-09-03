@@ -1,36 +1,36 @@
 class Solution {
 public:
-    int func(vector<int>&arr , int mid ){
-        int days = 1;
-        int cumSum = 0;
+    
+    int solve(vector<int>& arr , int m , int d){
+        int cum = 0;
+        int cnt = 1;
+
         for(int i = 0 ; i < arr.size() ; i++){
-                cumSum += arr[i];
-            if(cumSum > mid){
-                days++;
-                cumSum = arr[i];
+            cum += arr[i];
+
+            if(cum > m){
+                cnt++;
+                cum = arr[i];
             }
         }
-        return days;
+        return cnt;
     }
-    
     int shipWithinDays(vector<int>& arr, int days) {
        int n = arr.size();
-       int l = *max_element(arr.begin() , arr.end());
-       int h = accumulate(arr.begin() , arr.end(),0);
-       int minCap = 1;
+       int l = *max_element(arr.begin() ,arr.end());
+       int h = accumulate(arr.begin() , arr.end() , 0);
+       int mini = 1;
 
-       while( l <= h){
+       while(l <= h){
+         int m = l + (h - l)/2;
+         int pos = solve(arr , m , days);
 
-        int mid = l + ( h - l)/2;
-        int possAns = func(arr, mid );
-
-        if(possAns <= days){
-            minCap = mid;
-            h = mid - 1;
-        }
-        else l = mid +  1;
-       
+         if(pos <= days){
+            mini = m;
+            h = m - 1;
+         }
+         else l = m  + 1;
        }
-      return minCap;
+       return mini;
     }
 };
