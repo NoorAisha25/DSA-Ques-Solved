@@ -5,18 +5,18 @@ public:
         int l = 0;
         int h = n - 1;
 
-        while ( l <= h){
-            int mid = l +  ( h - l)/2;
+        while(l <= h){
+            int m = l + (h - l)/2;
 
-            if(nums[mid ] == target) return mid;
+            if(nums[m] == target) return m;
 
-            if(nums[l] <= nums[mid]){
-                if(nums[l] <= target && target <= nums[mid]) h = mid - 1;
-                else l = mid + 1;
+            if(nums[l] <= nums[m]){
+                if(nums[l] <= target && target <= nums[m]) h = m - 1;
+                else l = m + 1;
             }
             else{
-                if(nums[mid] <= target && target <= nums[h]) l = mid + 1;
-                else h = mid - 1;
+                if(nums[m] <= target && target <= nums[h]) l = m + 1;
+                else h = m  - 1;
             }
         }
         return -1;
