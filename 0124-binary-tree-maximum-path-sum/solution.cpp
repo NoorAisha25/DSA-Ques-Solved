@@ -15,20 +15,20 @@ public:
     int solve(TreeNode* root){
         if(root == NULL) return 0;
 
-        int l = solve(root -> left);
-        int r = solve(root -> right);
+        int left = solve(root->left);
+        int right = solve(root -> right);
 
-        int case1 = l + r + root->val;
-        int case2 = max(l , r) + root->val;
-        int case3 = root->val;
+        int a = left + right + root->val;
+        int b = max(left ,right) + root->val;
+        int c = root->val;
 
-        maxSum = max({maxSum , case1 , case2 , case3});
+        maxSum = max({maxSum , a , b , c});
 
-        return max(case2 , case3);
+        return max(b , c);
     }
     int maxPathSum(TreeNode* root) {
-       maxSum = INT_MIN;
-       solve(root);
-       return maxSum;
+      maxSum = INT_MIN;
+      solve(root);
+      return maxSum;
     }
 };
