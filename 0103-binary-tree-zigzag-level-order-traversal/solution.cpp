@@ -20,22 +20,19 @@ public:
         bool flag = true;
 
         while(!q.empty()){
-          int n = q.size();
-          vector<int>level(n);
+            int n = q.size();
+            vector<int>level(n);
+            for(int i = 0 ; i < n ; i++){
+                TreeNode* curr = q.front();
+                q.pop();
 
-          for(int i = 0 ; i < n ; i++){
-            TreeNode* curr = q.front();
-            q.pop();
-
-            int idx = (flag) ? i : (n - 1 - i);
-
-            level[idx] = curr -> val;
-
-            if(curr -> left) q.push(curr->left);
-            if(curr->right) q.push(curr->right);
-          }
-          flag = !flag;
-          ans.push_back(level);
+                int idx = (flag) ? i : (n - 1 - i);
+                level[idx] = curr->val;
+                if(curr -> left) q.push(curr->left);
+                if(curr->right) q.push(curr->right);
+            }
+            flag = !flag;
+            ans.push_back(level);
         }
         return ans;
     }
