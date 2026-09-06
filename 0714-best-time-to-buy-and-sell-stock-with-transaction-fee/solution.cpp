@@ -6,9 +6,8 @@ public:
         int mini = prices[0];
 
         for(int i = 1 ; i < n ; i++){
-            int cost = prices[i] - mini - fee;
-            profit = max( profit , cost);
-            mini = min( mini , prices[i] - profit);
+            profit = max(profit , prices[i] - mini - fee);
+            mini = min(mini, prices[i] - profit);
         }
         return profit;
     }
