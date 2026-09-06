@@ -20,18 +20,18 @@ public:
 
         while(!q.empty()){
             int n = q.size();
-            long long left = q.front().second;
-            long long right = q.back().second;
-            maxi = max(maxi , right - left + 1);
+            long long l = q.front().second;
+            long long r = q.back().second;
+            maxi = max(maxi , r - l  + 1);
 
-            for(int i = 0 ; i<n ; i++){
-                auto[node , idx] = q.front();
+            for(int i = 0 ; i < n ; i++){
+                auto [node, idx] = q.front();
                 q.pop();
 
-                long long nor = idx - left;
+                long long nor = idx - l;
 
                 if(node -> left) q.push({node -> left , nor * 2});
-                if(node->right) q.push({node -> right , nor * 2 + 1});
+                if(node -> right) q.push({node->right , nor * 2 + 1});
             }
         }
         return (int)maxi;
