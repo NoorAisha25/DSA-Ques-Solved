@@ -13,16 +13,16 @@ class Solution {
 
 public:    
     int countNodes(TreeNode* root) {
-       if(root == NULL ) return 0;
+       if(root == NULL) return 0;
 
        int left = solve(root->left);
        int right = solve(root->right);
 
        if(left == right){
-        return (1 << left) + countNodes(root->right);
+         return (1 << left) + countNodes(root->right);
        }
        else{
-        return (1 << right) + countNodes(root -> left);
+         return (1 << right) + countNodes(root->left);
        }
     }
 
@@ -30,7 +30,7 @@ public:
         int h = 0;
         while(root){
             h++;
-            root = root -> left;
+            root = root->left;
         }
         return h;
     }
