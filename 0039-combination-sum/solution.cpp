@@ -1,36 +1,29 @@
 class Solution {
 public:
-    set<vector<int>>s;
-
-    void solve(int i ,  vector<vector<int>> &ans , vector<int>&arr , int k , vector<int>&comb ){
-
-        if( i == arr.size() || k < 0 ){
-            return;
-        }
-        if(k == 0){
-            if(s.find(comb) == s.end()){
-                ans.push_back(comb);
-                s.insert(comb);
+    set<vector<int>>st;
+    void solve(int i ,vector<int>& arr, int k ,vector<vector<int>>& res ,vector<int>& comb ){
+          
+          if(i == arr.size() || k < 0) return;
+          if(k == 0){
+            if(st.find(comb) == st.end()){
+                res.push_back(comb);
+                st.insert(comb);
             }
             return;
-        }
-        //single ele
-        comb.push_back(arr[i]);
-        solve(i+1 , ans , arr, k-arr[i] , comb);
+          }
+          
+          comb.push_back(arr[i]);
+          solve(i + 1 , arr , k - arr[i] , res, comb);
+          solve(i  , arr , k - arr[i] , res, comb);
+          comb.pop_back();
 
-        //multiple
-        solve(i , ans , arr ,k-arr[i] , comb);
-
-        //exclude
-        comb.pop_back();
-        solve(i+1 , ans , arr, k , comb);
+          solve(i+1 , arr , k , res , comb);
     }
     vector<vector<int>> combinationSum(vector<int>& arr, int target) {
-        sort(arr.begin() , arr.end());
-        vector<vector<int>>ans;
+        sort(arr.begin() ,arr.end());
+        vector<vector<int>>res;
         vector<int>comb;
-
-        solve(0 , ans , arr , target , comb);
-        return ans;
+        solve(0 , arr, target , res, comb);
+        return res;
     }
 };
