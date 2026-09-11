@@ -5,8 +5,8 @@ public:
     
     void push(int x) {
           while(!s1.empty()){
-             s2.push(s1.top());
-             s1.pop();
+            s2.push(s1.top());
+            s1.pop();
           }
           s1.push(x);
           while(!s2.empty()){
@@ -30,7 +30,7 @@ public:
     }
     
     bool empty() {
-       return s1.empty();
+      return s1.empty();
     }
 };
 
