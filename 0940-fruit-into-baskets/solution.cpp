@@ -7,16 +7,15 @@ public:
         unordered_map<int,int>mp;
 
         for(int r = 0 ; r < n ; r++){
-            mp[fruits[r]]++;
-            while(mp.size() > 2){
-                mp[fruits[l]]--;
-                if(mp[fruits[l]] == 0){
-                    mp.erase(fruits[l]);
-                }
-                l++;
-            }
-
-            ans = max( ans , r - l  + 1);
+           mp[fruits[r]]++;
+           while(mp.size() > 2){
+             mp[fruits[l]]--;
+             if(mp[fruits[l]] == 0){
+                 mp.erase(fruits[l]);
+             }
+             l++;
+           }
+           ans = max(ans , r - l  + 1);
         }
         return ans;
     }
