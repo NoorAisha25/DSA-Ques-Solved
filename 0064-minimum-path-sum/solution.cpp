@@ -5,14 +5,14 @@ public:
         int n = grid[0].size();
 
         vector<vector<int>>t(m , vector<int>(n , 0));
-        
+
         t[0][0] = grid[0][0];
 
         for(int col = 1 ; col < n ; col++){
             t[0][col] = grid[0][col] + t[0][col-1];
         }
 
-        for(int row = 1 ; row < m ; row++){
+        for(int row = 1 ;  row < m ; row++){
             t[row][0] = grid[row][0] + t[row-1][0];
         }
 
