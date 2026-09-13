@@ -12,12 +12,12 @@ public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
         if(root == NULL) return NULL;
 
-        if(root->val == p ->val || root->val == q->val) return root;
+        if(root->val == p->val || root->val == q->val) return root;
 
-        TreeNode* leftlca = lowestCommonAncestor(root -> left , p , q);
-        TreeNode* rightlca = lowestCommonAncestor(root -> right , p , q);
+        TreeNode* left = lowestCommonAncestor(root->left , p , q);
+        TreeNode* right = lowestCommonAncestor(root->right , p , q);
 
-        if( leftlca && rightlca) return root;
-        return (leftlca != NULL) ? leftlca : rightlca;
+        if(left && right) return root;
+        return (left != NULL) ? left : right;
     }
 };
