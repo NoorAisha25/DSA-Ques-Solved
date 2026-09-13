@@ -2,21 +2,23 @@ class Solution {
 public:
     vector<int> singleNumber(vector<int>& nums) {
         int n = nums.size();
-        long x = 0;
+        long long x = 0;
         for(int i = 0 ; i < n ; i++){
             x ^= nums[i];
         }
 
-        long mask = (x & (-x));
-        int a = 0 ; int b = 0;
-        for(int i : nums){
-            if(mask & i){
-                b ^= i;
+        long long mask = x & (-x);
+        int b1 = 0;
+        int b2 = 0;
+
+        for(int i = 0 ; i < n ; i++){
+            if(nums[i] & mask){
+                b1 ^= nums[i];
             }
             else{
-                a ^= i;
+                b2 ^= nums[i];
             }
         }
-        return {a , b};
+        return {b1,b2};
     }
 };
