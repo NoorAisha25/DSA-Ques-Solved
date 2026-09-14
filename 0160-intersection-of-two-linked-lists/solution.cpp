@@ -8,37 +8,39 @@
  */
 class Solution {
 public:
-    ListNode* collision(ListNode* Longer , ListNode* Shorter , int d){
+    ListNode* solve(ListNode* longer , ListNode* shorter , int d){
+
         while(d--){
-            Longer = Longer->next;
+            longer = longer -> next;
         }
 
-        while(Longer != Shorter){
-            Longer = Longer->next;
-            Shorter = Shorter -> next;
+        while(longer != shorter){
+            longer = longer -> next;
+            shorter = shorter -> next;
         }
 
-        return Longer;
+        return shorter;
     }
     ListNode *getIntersectionNode(ListNode *A, ListNode *B) {
        if(A == NULL && B == NULL) return NULL;
 
        ListNode* ta = A;
        ListNode* tb = B;
+
        int a = 0;
        int b = 0;
 
-       while(ta != NULL){
-            a++;
-            ta = ta -> next;
+       while(ta){
+          a++;
+          ta = ta->next;
        }
 
-       while(tb != NULL){
-            b++;
-            tb = tb -> next;
+       while(tb){
+        b++;
+        tb = tb->next;
        }
 
-       if(a > b) return collision(A , B , a-b);
-       else return collision(B , A , b-a);
+       if(a > b) return solve(A , B , a-b);
+       else return solve(B , A , b-a);
     }
 };
