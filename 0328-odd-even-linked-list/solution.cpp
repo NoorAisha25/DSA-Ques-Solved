@@ -37,17 +37,17 @@ public:
         // }
 
         ListNode* odd = head;
-        ListNode* even = head -> next ;
+        ListNode* even = head->next;
         ListNode* evenhead = even;
 
-        while( even != NULL && even -> next != NULL){
-            odd->next = odd ->next ->next;
-            odd = odd->next;
-            even ->next = even ->next ->next;
+        while(even && even->next){
+            odd -> next = odd->next->next;
+            odd = odd -> next;
+            even -> next = even -> next ->next;
             even = even -> next;
         }
 
-        odd ->next = evenhead;
+        odd -> next = evenhead;
         return head;
     }
 };
