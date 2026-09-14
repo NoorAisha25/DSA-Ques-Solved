@@ -12,32 +12,31 @@ class Solution {
 public:
    
     bool isPalindrome(ListNode* head) {
-       if( head == NULL || head -> next == NULL) return true;
-       ListNode* prev = NULL;
+       if(head == NULL || head -> next == NULL) return true;
+
        ListNode* slow = head;
        ListNode* fast = head;
-
-       while( fast != NULL && fast -> next != NULL){
-          prev = slow;
-          slow = slow -> next;
-          fast = fast ->next -> next;
+       ListNode* prev = NULL;
+       while(fast && fast -> next){
+           prev = slow;
+           slow = slow -> next;
+           fast = fast -> next -> next;
        }
-
-       prev ->next = nullptr;
-       prev = head;
-
+       
+       prev->next = NULL;
        ListNode* back = NULL;
-       while(slow != NULL){
-            ListNode* n = slow -> next;
-            slow ->next = back;
-            back = slow;
-            slow = n;
+       while(slow){
+          ListNode* n = slow -> next;
+          slow->next = back;
+          back = slow ;
+          slow = n;
        }
 
-       while( prev != NULL && back != NULL){
-           if( prev->val != back ->val) return false;
-           prev = prev->next;
-           back = back -> next;
+       prev = head;
+       while(prev && back){
+          if(prev->val != back -> val) return false;
+          prev = prev -> next;
+          back = back -> next;
        }
        return true;
     }
