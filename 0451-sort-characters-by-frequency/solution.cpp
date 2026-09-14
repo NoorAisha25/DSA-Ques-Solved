@@ -1,31 +1,28 @@
 class Solution {
 public:
-    typedef pair<char,int> P;
+    typedef pair<char,int>P;
     string frequencySort(string s) {
         
-  // 3step --- count freq of each letter, sort them by there freq , make a string result and enter in them the result
-    vector<pair<char,int>> vec(123);
 
-        for(char &ch : s){
-            int freq = vec[ch].second;
-            vec[ch] = {ch , freq+1};
+        vector<pair<char,int>>vec(123);
+        
+        for(char c : s){
+            int freq = vec[c].second;
+            vec[c] = {c , freq+1};
         }
 
-        auto lambda  = [&]( P &P1 , P &P2 ){
-             return P1.second > P2.second;
-        };
-        
-        sort( vec.begin() , vec.end() , lambda);
+        sort(vec.begin() , vec.end() , [](P &P1 , P &P2){
+            return P1.second > P2.second;
+        });
 
         string res = "";
 
-        for(int i = 0 ; i<=122 ; i++){
-             char ch = vec[i].first;
-             int freq = vec[i].second;
-             string temp = string(freq , ch);
-             res += temp;
+        for(int i = 0 ; i <= 122 ; i++){
+            char c = vec[i].first;
+            int freq = vec[i].second;
+            string temp = string(freq , c);
+            res += temp;
         }
-
         return res;
     }
 };
