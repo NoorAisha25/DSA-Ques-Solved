@@ -21,18 +21,19 @@ public:
 
     //    return ans;
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
-          sort(nums.begin() , nums.end());
-          int n = nums.size();
-          int subset = 1 << n;
-          set<vector<int>>st;
+        sort(nums.begin() , nums.end());
+        int n = nums.size();
+        int subset = 1 << n;
+        set<vector<int>>st;
 
-          for(int i = 0 ; i < subset ; i++){
+        for(int i = 0 ; i < subset ; i++){
             vector<int>temp;
             for(int j = 0 ; j < n ; j++){
                 if(i & (1 << j)) temp.push_back(nums[j]);
             }
             st.insert(temp);
-          }
-          return vector<vector<int>>(st.begin() , st.end());
+        }
+
+        return vector<vector<int>>(st.begin() , st.end());
     }
 };
