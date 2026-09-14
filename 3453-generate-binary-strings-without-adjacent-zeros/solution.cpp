@@ -1,21 +1,21 @@
 class Solution {
 public:
-    void solve(int i , string &s , vector<string>&ans){
+    void solve(int i , string&s , vector<string>&res){
         if(i >= s.size()){
-            ans.push_back(s);
+            res.push_back(s);
             return;
         }
 
-        solve(i+1 , s , ans);
+        solve(i+1 , s , res);
         s[i] = '0';
-        solve(i+2 , s , ans);
+        solve(i+2 , s , res);
         s[i] = '1';
     }
     vector<string> validStrings(int n) {
        string s(n , '1');
-       vector<string>ans;
+       vector<string>res;
 
-       solve(0 , s , ans);
-       return ans;
+       solve(0 , s , res);
+       return res;
     }
 };
