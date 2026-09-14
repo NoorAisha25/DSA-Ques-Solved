@@ -12,27 +12,26 @@
 class Solution {
 public:
     ListNode* sortList(ListNode* head) {
-       if(head == NULL || head -> next == NULL ) return head;
-       ListNode* temp = head;
-       vector<int> arr;
+       if(head == NULL || head -> next == NULL) return head;
 
-       while( temp != NULL){
-          arr.push_back(temp -> val);
+       vector<int> arr;
+       ListNode* temp = head;
+       while(temp){
+          arr.push_back(temp->val);
           temp = temp -> next;
        }
 
        sort(arr.begin() , arr.end());
-       int n = arr.size();
 
-       ListNode* nN = new ListNode(arr[0]);
-       ListNode * m = nN;
-
-       for(int i = 1 ; i < n ; i++){
-         ListNode* temp = new ListNode(arr[i]);
-         nN -> next = temp;
-         nN = temp;
+       ListNode* n = new ListNode(arr[0]);
+       ListNode* mover = n;
+       for(int i = 1 ; i < arr.size() ; i++){
+          ListNode* m = new ListNode(arr[i]);
+          mover -> next = m;
+          mover = m;
        }
-       return m;
+
+       return n;
     }
 };
 
