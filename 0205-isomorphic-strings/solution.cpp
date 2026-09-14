@@ -1,22 +1,22 @@
 class Solution {
 public:
     bool isIsomorphic(string s, string t) {
+        
         if(s.size() != t.size()) return false;
 
-        vector<int> mps(256 , -1);
-        vector<int> mpt(256 , -1);
+        vector<int>m(256 , -1);
+        vector<int>h(256 , -1);
 
-        int n = s.size();
+        for(int i = 0 ; i < s.size()  ; i++){
 
-        for(int i = 0 ; i < n ; i++){
-            if(mps[s[i]] == -1 && mpt[t[i]] == -1){
-                mps[s[i]] = t[i];
-                mpt[t[i]] = s[i];
+            if(m[s[i]] == -1 && h[t[i]] == -1){
+                m[s[i]] = t[i];
+                h[t[i]] = s[i];
             }
-            else if( mps[s[i]] != t[i] && mpt[t[i]] != s[i]){
-                return false;
-            }
+
+            else if( m[s[i]] != t[i] && h[t[i]] != s[i]) return false;
         }
+
         return true;
     }
 };
