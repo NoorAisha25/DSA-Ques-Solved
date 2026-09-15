@@ -1,44 +1,48 @@
 class Solution {
 public:
-       int lowerB(vector<int>& nums, int target){
-          int n = nums.size();
-          int l = 0;
-          int h = n - 1;   
-          int ans = n;
+       int lowerb(vector<int>&arr , int k){
+           int n = arr.size();
+           int l = 0;
+           int h = n - 1;
+           int ans = n;
 
-          while( l <= h){
-            int mid = l + (h - l)/2;
+           while(l <= h){
+            int m = l + (h - l)/2;
 
-            if(nums[mid] >= target){
-                ans = mid ;
-                h = mid - 1;
+            if(arr[m] >= k){
+                ans = m;
+                h = m - 1;
             }
-            else l = mid + 1;
-          }
-          return ans;
+            else l = m  +1;
+           }
+
+           return ans;
        }
-        int upperB(vector<int>& nums, int target){
-          int n = nums.size();
-          int l = 0;
-          int h = n - 1;   
-          int ans = n;
 
-          while( l <= h){
-            int mid = l + (h - l)/2;
+       int upperb(vector<int>&arr , int k){
+           int n = arr.size();
+           int l = 0;
+           int h = n - 1;
+           int ans = n;
 
-            if(nums[mid] > target){
-                ans = mid ;
-                h = mid - 1;
+           while(l <= h){
+            int m = l + (h - l)/2;
+
+            if(arr[m] > k){
+                ans = m;
+                h = m - 1;
             }
-            else l = mid + 1;
-          }
-          return ans;
+            else l = m  +1;
+           }
+
+           return ans;
        }
+
        vector<int> searchRange(vector<int>& nums, int target) {
-        int lb = lowerB(nums , target);
-        int ub = upperB(nums , target);
+       int lb = lowerb(nums , target);
+       int ub = upperb(nums , target);
 
-        if(lb == nums.size() || nums[lb] != target) return {-1 , -1};
-        return {lb , ub -1};  
+       if(lb == nums.size() || nums[lb] != target) return {-1,-1};
+       return {lb , ub-1};
     }
 };
