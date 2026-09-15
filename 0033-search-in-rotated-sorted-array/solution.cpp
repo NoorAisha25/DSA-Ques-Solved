@@ -14,11 +14,13 @@ public:
                 if(nums[l] <= target && target <= nums[m]) h = m - 1;
                 else l = m + 1;
             }
-            else{
+
+            else {
                 if(nums[m] <= target && target <= nums[h]) l = m + 1;
-                else h = m  - 1;
+                else h = m - 1;
             }
         }
+
         return -1;
     }
 };
