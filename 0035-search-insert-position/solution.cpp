@@ -2,35 +2,20 @@ class Solution {
 public:
     int searchInsert(vector<int>& nums, int target) {
         int n= nums.size();
-        // int low = 0 ; int high = n-1;
-        // int ans = n;
-        // while(low<= high){
-        //     int mid = low + (high -low)/2;
-        //     if(nums[mid] >= target){
-        //         ans = mid;
-        //         high = mid-1;
-        //     }
-        //     else low = mid+1;
-        // } return ans;
-         
-        /* ---- this question is similar to that o flower bound problem ---*/
+        int l = 0;
+        int h = n - 1;
+        int ans = n;
 
-        int l = 0 , h = n - 1 , ans = n;
-         
-         while( l <= h){
-            
-            int mid = ( l + h ) / 2;
+        while(l <= h){
 
-            if ( nums [ mid ] >= target){
+            int m = l + (h - l)/2;
 
-                ans = mid ;
-                h= mid -1;
+            if(nums[m] >= target){
+                ans = m;
+                h = m - 1;
             }
-
-            else l = mid + 1;
-         }
-         return ans ;
-
-
+            else l = m + 1;
+        }
+        return ans;
     }
 };
