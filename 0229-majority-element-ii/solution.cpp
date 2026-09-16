@@ -4,25 +4,25 @@ public:
         int n = nums.size();
         int cnt1 = 0;
         int cnt2 = 0;
-        int majEle1 = NULL;
-        int majEle2 = NULL;
-        
-        for(int i = 0 ; i < n ; i++){
-            if(majEle1 == nums[i]){
+        int majele1 = NULL;
+        int majele2 = NULL;
+
+        for(int i = 0 ; i <n ; i++){
+            if(majele1 == nums[i]){
                 cnt1++;
             }
-            else if(majEle2 == nums[i]){
+            else if(majele2 == nums[i]){
                 cnt2++;
             }
             else if(cnt1 == 0){
-                majEle1 = nums[i];
-                cnt1 = 1;
+                majele1 = nums[i];
+                cnt1++;
             }
             else if(cnt2 == 0){
-                majEle2 = nums[i];
-                cnt2 = 1;
+                majele2 = nums[i];
+                cnt2++;
             }
-            else {
+            else{
                 cnt1--;
                 cnt2--;
             }
@@ -30,18 +30,21 @@ public:
 
         int f1 = 0;
         int f2 = 0;
+
         for(int &num : nums){
-            if(num == majEle1){
+            if(num == majele1){
                 f1++;
             }
-            else if(num == majEle2){
+            else if(num == majele2){
                 f2++;
             }
         }
-        vector<int>arr;
-        if(f1 > n/3) arr.push_back(majEle1);
-        if(f2 > n/3) arr.push_back(majEle2);
 
-        return arr;
+        vector<int>res;
+
+        if(f1 > n/3) res.push_back(majele1);
+        if(f2 > n/3) res.push_back(majele2);
+
+        return res;
     } 
 };
