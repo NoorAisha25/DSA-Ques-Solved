@@ -5,12 +5,12 @@ public:
         vector<bool>visited(n , false);
         return dfs(arr , start , visited);
     }
+    bool dfs(vector<int>&arr , int i , vector<bool>&visited){
+      if(i < 0 || i >= arr.size() || visited[i] == true) return false;
 
-    bool dfs(vector<int>& arr , int i , vector<bool>& visited){
-        if(i < 0 || i >= arr.size() || visited[i]) return false;
+      if(arr[i] == 0) return true;
+      visited[i] = true;
 
-        if(arr[i] == 0) return true;
-        visited[i] = true;
-        return dfs(arr , i + arr[i] , visited) || dfs(arr , i - arr[i] , visited);
+      return dfs(arr , i - arr[i] , visited) || dfs(arr , i + arr[i] , visited);
     }
 };
