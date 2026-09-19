@@ -3,17 +3,19 @@ public:
     int jump(vector<int>& nums) {
         //two pointer approach
         int n = nums.size();
-        int miniJump = 0;
-        int l = 0 , r = 0;
+        int mini = 0;
+        int l = 0;
+        int r = 0;
+
         while(r < n-1){
-            int maxiJump = 0;
+            int maxi = 0;
             for(int i = l ; i <= r ; i++){
-                maxiJump = max(nums[i] + i , maxiJump);
+                maxi = max( maxi , i + nums[i]);
             }
-            miniJump++;
-            l = r + 1;
-            r = maxiJump;
+            mini++;
+            l = r+1;
+            r = maxi;
         }
-        return miniJump;
+        return mini;
     }
 };
