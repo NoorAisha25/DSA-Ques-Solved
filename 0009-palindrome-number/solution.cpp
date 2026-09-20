@@ -3,13 +3,13 @@ public:
     bool isPalindrome(int x){
        long long temp = x;
        long long rev = 0;
-       if(temp < 0) return false;
-       while(temp > 0){
-        int digit = temp%10;
-        temp = temp / 10;
-        rev = (rev * 10) + digit;
+       if(x < 0) return false;
+       while(temp){
+         int d = temp % 10;
+         rev = rev * 10 + d;
+         temp = temp / 10;
        }
-       if(x == rev) return true;
+       if(rev == x) return true;
        else return false;
     }
 };
