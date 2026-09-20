@@ -2,11 +2,11 @@ class Solution {
 public:
     int myAtoi(string s) {
         int n = s.size();
-        int sign = 1;
         long res = 0;
-        int i = 0 ;
+        int sign = 1;
+        int i = 0;
 
-        while(i < n && s[i] == ' ') i++;
+        while(i < n && s[i] == ' ')i++;
 
         if(i < n && (s[i] == '+' || s[i] == '-')){
             sign = (s[i] == '-') ? -1 : 1;
