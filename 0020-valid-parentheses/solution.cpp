@@ -10,7 +10,7 @@ public:
                 char ch = st.top();
                 st.pop();
 
-                if( (c == ')' && ch != '(') || (c == '}' && ch != '{') || (c == ']' && ch != '[')) return false;
+                if((c == ')' && ch != '(') || (c == '}' && ch != '{') || (c == ']' && ch != '[')) return false;
             }
         }
         return st.empty();
