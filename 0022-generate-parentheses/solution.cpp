@@ -1,5 +1,6 @@
 class Solution {
 public:
+    
     bool isvalid(string &s){
         stack<char>st;
 
@@ -9,12 +10,13 @@ public:
                 if(st.empty()) return false;
                 char ch = st.top();
                 st.pop();
+
                 if(c == ')' && ch != '(') return false;
             }
         }
         return st.empty();
     }
-    void solve(string& s , int n ,  vector<string>&res){
+    void solve(int n , string &s , vector<string>&res){
 
         if(s.size() == 2 * n){
             if(isvalid(s)){
@@ -24,17 +26,17 @@ public:
         }
 
         s.push_back('(');
-        solve(s , n , res);
+        solve(n , s , res);
         s.pop_back();
 
         s.push_back(')');
-        solve(s , n , res);
+        solve(n, s , res);
         s.pop_back();
     }
     vector<string> generateParenthesis(int n) {
        string s = "";
        vector<string>res;
-       solve(s , n , res);
+       solve(n , s , res);
        return res;
     }
 };
