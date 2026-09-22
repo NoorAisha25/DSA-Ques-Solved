@@ -1,0 +1,20 @@
+name: Sync LeetCode
+
+on:
+  workflow_dispatch: 
+  schedule:
+    - cron: '0 0 * * *' 
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync Solutions
+        uses: jasonwq/leetcode-sync@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          leetcode_session: ${{ secrets.LEETCODE_SESSION }}
+          leetcode_csrf_token: ${{ secrets.csrftoken}}
